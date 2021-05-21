@@ -26,4 +26,7 @@ export default class UserRepository extends VersionableRepository<
 	public findOne(data) {
 		return super.findOne(data);
 	}
+	public async feedback(id, dataToUpdate, updator) {
+		return super.feedback(id, dataToUpdate, updator);
+	}
 }

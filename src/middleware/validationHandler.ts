@@ -9,6 +9,7 @@ export default (config) => (
 	const errors = [];
 	let index = 0;
 	console.log('Inside validation Handler');
+	console.log('Request:', req.body);
 	for (const prop in config) {
 		if (config.hasOwnProperty(prop)) {
 			inputData = req[config[prop].in[0]];

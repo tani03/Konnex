@@ -6,9 +6,10 @@ import authMiddleware from '../../middleware/authMiddleware';
 
 const userRoutes = Router();
 
-userRoutes.get('/find/:id', authMiddleware(), validationHandler(config.get), UserController.get);
+userRoutes.get('/find/:id', authMiddleware(), UserController.get);
 userRoutes.get('/getall', authMiddleware(), UserController.getAll);
-userRoutes.post('/create-user', validationHandler(config.create), UserController.create);
-userRoutes.post('/login', validationHandler(config.login), UserController.login);
+userRoutes.post('/create-user', UserController.create);
+userRoutes.post('/login', UserController.login);
+userRoutes.put('/bug-report', UserController.feedback);
 
 export default userRoutes;
