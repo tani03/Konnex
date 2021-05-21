@@ -1,6 +1,6 @@
-import * as mongoose from 'mongoose';
+import * as mongooge from "mongoose";
 
-export default class VersionableSchema extends mongoose.Schema {
+export default class VersionableSchema extends mongooge.Schema {
 	constructor(options: any, collections: any) {
 		const versionedOptions = Object.assign(
 			{
@@ -10,8 +10,12 @@ export default class VersionableSchema extends mongoose.Schema {
 					type: Date,
 				},
 
+				deletedAt: {
+					type: Date,
+				},
+
 				originalId: {
-					required: true,
+					required: false,
 					default: undefined,
 					type: String,
 				},
@@ -19,17 +23,30 @@ export default class VersionableSchema extends mongoose.Schema {
 				updatedAt: {
 					required: false,
 					default: undefined,
+					type: Date,
+				},
+
+				updatedBy: {
+					required: false,
+					default: undefined,
 					type: String,
 				},
 
 				createdBy: {
-					required: true,
+					required: false,
+					default: undefined,
+					type: String,
+				},
+
+				deletedBy: {
+					required: false,
 					default: undefined,
 					type: String,
 				},
 			},
 			options
 		);
+
 		super(versionedOptions, collections);
 	}
 }

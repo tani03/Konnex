@@ -19,7 +19,6 @@ export default () => (
 			console.log('Inside token');
 			const user = jwt.verify(token, process.env.TOKEN_SECRET);
 			console.log('Token verified');
-			next();
 		}
 	} catch (error) {
 		next({

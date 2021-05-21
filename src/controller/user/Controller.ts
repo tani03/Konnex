@@ -1,7 +1,8 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response, NextFunction, response } from 'express';
 import UserRepository from '../../repositories/user/UserRepositories';
 import * as bcrypt from 'bcrypt';
 import * as jwt from 'jsonwebtoken';
+import userRoutes from './routes';
 
 class UserController {
 	userRepository: UserRepository = new UserRepository();
@@ -73,6 +74,7 @@ class UserController {
 			name,
 			email,
 			password,
+			bugReport
 		} = req.body;
 		const user = new UserRepository();
 		const hash = bcrypt.hashSync(password, 10);
@@ -82,8 +84,9 @@ class UserController {
 					name,
 					email,
 					password: hash,
+					bugReport
 				},
-				undefined
+				'admin'
 			)
 			.then(() => {
 				res.status(200).send({
@@ -137,6 +140,22 @@ class UserController {
 				code: 403
 			});
 		}
+	}
+	public async feedback(req: Request, res: Response, next: NextFunction) {
+		console.log('Inside feedback method');
+		const { id, dataToUpdate } = req.body;
+		if(dataToUpdate && id) {
+			const user = new UserRepository();
+			await user.feedback(id, dataToUpdate, undefined);
+		} else {
+			res.send({
+				message: "Please fill all fields"
+			});
+		}
+		res.send({
+			message: 'Report posted',
+			code: 200
+		});
 	}
 }
 

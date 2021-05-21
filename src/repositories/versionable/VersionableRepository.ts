@@ -1,4 +1,4 @@
-import * as mongoose from 'mongoose';
+import * as mongoose from "mongoose";
 
 export default class VersionableRepository<
 	D extends mongoose.Document,
@@ -17,6 +17,10 @@ export default class VersionableRepository<
 		return String(mongoose.Types.ObjectId());
 	}
 
+	public async findOne(query: object) {
+		return await this.model.findOne(query).lean();
+	}
+
 	public async createUser(data: any, creator): Promise<D> {
 		const id = VersionableRepository.generateObjectId();
 
@@ -24,7 +28,7 @@ export default class VersionableRepository<
 			...data,
 			originalId: id,
 			createdBy: creator,
-			_id: id,
+			_id: id
 		};
 
 		return await this.model.create(modelData);
@@ -38,7 +42,38 @@ export default class VersionableRepository<
 		return await this.model.find({});
 	}
 
-	public async findOne(query: object) {
-		return await this.model.findOne(query).lean();
+	public async update(id: any, dataToUpdate: any, updator) {
+		await this.findOne({
+			_id: id,
+		}).then((data) => {
+			if (data === null) throw undefined;
+			const newData = {
+				...dataToUpdate,
+				updatedAt: Date.now(),
+				updatedBy: updator,
+			};
+
+			this.model.updateOne({ _id: id }, newData).then((res) => {
+				if (res == null) throw undefined;
+				else return res;
+			});
+		});
+	}
+	public async feedback(id: any, dataToUpdate: any, updator) {
+		await this.findOne({
+			_id: id,
+		}).then((data) => {
+			if (data === null) throw undefined;
+			const newData = {
+				...dataToUpdate,
+				updatedAt: Date.now(),
+				updatedBy: updator,
+			};
+			console.log(newData)
+			this.model.updateOne({ _id: id }, newData).then((res) => {
+				if (res == null) throw undefined;
+				else return res;
+			});
+		});
 	}
 }
