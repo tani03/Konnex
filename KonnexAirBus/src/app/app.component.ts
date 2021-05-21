@@ -1,36 +1,35 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core'
-import { LoginComponent } from './components/login/login.component';
-
+import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core'
+import {GlobalConstants} from './../app/global-constants';
 
 @Component({
   selector:'pm-root',
   templateUrl:'./app.component.html'
 })
 export class AppComponent implements OnInit{
-  title: string = 'Konnex';
 
-
+  title:string='Konnex';
   ngOnInit(): void {
-   
+    
   }
 
-  // @ViewChild(LoginComponent) loginComponent;
-  // title:string='Konnex';
-  // isLogin:boolean=false;
+  
 
+  isLogin:boolean=false;
 
-  // ngAfterViewInit() {  
-  //   this.isLogin= this.loginComponent.isLogin;  
-  //   }  
+   onLogin(){
+  
+    this.isLogin=GlobalConstants.loginCheck;
+     console.log("done");
+     console.log(this.isLogin);
+     if(this.isLogin)
+      return true;
+      return false;
+   }
 
-  // onLogin(){
-  //  // this.changeLoginValue()
-  //   console.log("done");
-  //   console.log(this.isLogin)
-  // }
+   onLogout(){
+    GlobalConstants.loginCheck=false;
+    
+   }
 
-  // // changeLoginValue(){
-  // //   this.isLogin=this.loginComponent.changeValue();
-  // // }
-
+ 
 }
