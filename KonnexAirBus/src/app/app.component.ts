@@ -7,6 +7,9 @@ import { LoginComponent } from './components/login/login.component';
   templateUrl:'./app.component.html'
 })
 export class AppComponent implements OnInit{
+  title: string = 'Konnex';
+
+
   ngOnInit(): void {
    
   }

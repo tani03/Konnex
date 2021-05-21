@@ -40,21 +40,21 @@ export class LoginComponent implements OnInit {
       console.log("Loggingggg");
 
      //uncomment these lines//
-      //   this.loginService.get(this.credentials.username)
-      // .subscribe(
-      //   data => {
-      //     this.currentUser = data;
-      //     console.log(data);
-      //   },
-      //   error => {
-      //     console.log(error);
-      //   });
-      // if(this.currentUser.password==this.credentials.password){
+        this.loginService.get(this.credentials.username)
+      .subscribe(
+        data => {
+          this.currentUser = data;
+          console.log(data);
+        },
+        error => {
+          console.log(error);
+        });
+      if(this.currentUser.password==this.credentials.password){
 
        //uncomment these lines
 
        //comment these lines
-        if(this.credentials.password=="taniya"){
+        // if(this.credentials.password=="taniya"){
 
       //comment above line
 
