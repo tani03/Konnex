@@ -8,7 +8,7 @@ import { User } from '../models/user.model';
 })
 export class LoginService {
 
-  baseUrl="http://localhost:9000"
+  baseUrl="http://localhost:8080"
   constructor(private http:HttpClient) { }
 
   get(username: any):Observable<User>{

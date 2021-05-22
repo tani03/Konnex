@@ -3,7 +3,8 @@ import { Router } from '@angular/router';
 import { Output, EventEmitter } from '@angular/core';
 
 import { User } from 'src/app/models/user.model';
-import {LoginService} from '../../services/login.service'
+import {LoginService} from '../../services/login.service';
+import { GlobalConstants} from '../../global-constants';
 
 @Component({
   selector: 'pm-login',
@@ -14,8 +15,7 @@ export class LoginComponent implements OnInit {
 
   @Output() newItemEvent = new EventEmitter<boolean>();
   isLogin:boolean=false;
- 
-
+  msgFromLogin=[];
   credentials={
     username:'',
     password:''
@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
     if((this.credentials.username!='' && this.credentials.password!='') && (this.credentials.username!=null && this.credentials!=null)){
       console.log("Loggingggg");
 
-     //uncomment these lines//
+   
         this.loginService.get(this.credentials.username)
       .subscribe(
         data => {
@@ -51,18 +51,15 @@ export class LoginComponent implements OnInit {
         });
       if(this.currentUser.password==this.credentials.password){
 
-       //uncomment these lines
 
-       //comment these lines
-        // if(this.credentials.password=="taniya"){
-
-      //comment above line
+      
 
       
         console.log("Correct password");
         this.isLogin=true;
         
-       // this.changeValue()
+        
+         GlobalConstants.loginCheck=this.isLogin;
 
         this.router.navigate(['/homepage']);
       }
@@ -78,8 +75,6 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  // changeValue(){
-  //   this.newItemEvent.emit(this.isLogin);
-  // }
+ 
 
 }

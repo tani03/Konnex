@@ -4,13 +4,16 @@
     </div>
     <div class='card-body'>
         <div class='row'>
-            <div class='col-md-2'>Filter by:</div>
+            <div class='col'>Filter by:</div>
+        </div>
+        <div class='row'>
             <div class='col-md-4'>
                 <input type="text" [(ngModel)]='listFilter'/>
             </div>
         </div>
+      
         <div class='row'>
-            <div class='col-md-6'>4
+            <div class='col-md-6'>
                 <h4>Filtered By:{{listFilter}}</h4>
                 
             </div>
@@ -19,33 +22,19 @@
             <table class="table" *ngIf='products && products.length'>
               <thead>
                   <tr>
-                      <th>
-                          <button class='btn btn-primary' (click)='toggleImage()'>
-                              {{showImage?'Hide':'Show'}} Image
-                          </button>
-                      </th>
-                      <th>Product</th>
-                      <th>Code</th>
-                      <th>Available</th>
-                      <th>Price</th>
-                      <th>5 Star Rating</th>
-                      <th></th>
+    
+                      <th>Notification</th>
+                      <th>Description</th>
+                     
+                     
                   </tr>
               </thead>
               <tbody class="say">
                   <tr *ngFor="let product of filteredProducts" [routerLink]="['/products',product.productId]">
-                      <td class='colorDiv'>
-                          <img *ngIf='showImage' [src]='product.imageUrl' [title]='product.productName' [style.width.px]='imageWidth' [style.margin.px]='imageMargin'>
-                      </td>  
+    
                       <td>{{product.productName}}</td>
-                      <td>{{product.productCode}}</td>
-                      <td>{{product.releaseDate}}</td>
-                      <td>{{product.price| currency:'INR':'symbol':'1.2-2'}}</td>
-                      <td class="centerDiv">
-                          <pm-star  [rating]='product.starRating'
-                                    (ratingClicked)='onRatingClicked($event)'></pm-star>
-                      </td>
-                      
+                      <td>{{product.description}}</td>
+                  
                       
                       
                   </tr>
@@ -53,13 +42,7 @@
               
             </table>
           </div>
-          <div> {{starNumber}}</div> 
-          <select>
-              
-                  <option  *ngFor="let cities of city">{{cities}}</option>
-              
-         
-        </select>
+ 
     </div>
 
 </div>

@@ -5,21 +5,17 @@ import {ProductService} from './product.service';
 
 
 @Component({
-    
+    selector:'pm-products',
     templateUrl: './product-list.component.html',
     styleUrls:['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit{
 
  
-  starRating: number;
-  imageUrl: string;
-  starNumber:string="";
+
   
-  pageTitle:string='Product List';
-  imageWidth:number=50;
-  imageMargin:number=2;
-  showImage:boolean=true;
+  pageTitle:string='Announcements';
+
  
   products:IProduct[];
   errorMessage: string;
@@ -56,18 +52,9 @@ export class ProductListComponent implements OnInit{
     }
    
 
-    city:string[]=[
-        "Howrah","Kolkata","Delhi","Chennai","Hyderabad"
-    ];
+   
 
-    toggleImage():void{
-      this.showImage=!this.showImage;
-
-    }
-
-    onRatingClicked(message:string):void{
-      this.starNumber=message;
-    }
+    
 
     performFilter(filterBy: string): IProduct[] {
       filterBy = filterBy.toLocaleLowerCase();

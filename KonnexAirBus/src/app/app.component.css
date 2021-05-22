@@ -1,3 +1,7 @@
 .nav-link {
   font-size: large;
 }
+.container{
+  margin: auto;
+  padding: 10px 20px 10px 20px;
+}
